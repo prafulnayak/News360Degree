@@ -19,7 +19,7 @@ public class NewsViewModel extends AndroidViewModel {
         super(application);
         this.application = application;
         DataSource.Factory<Integer,News> factory = NewsDatabase.getsInstance(application).newsDao().allNewsDetails();
-        PagedList.Config pagConfig = new PagedList.Config.Builder().setPageSize(2).setEnablePlaceholders(true).build();
+        PagedList.Config pagConfig = new PagedList.Config.Builder().setPageSize(10).setEnablePlaceholders(false).build();
         LivePagedListBuilder<Integer, News> pagedListBuilder = new LivePagedListBuilder(factory,pagConfig);
         newsListLiveData = pagedListBuilder.build();
     }

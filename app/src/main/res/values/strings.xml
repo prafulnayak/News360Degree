@@ -2,4 +2,6 @@
     <string name="app_name">News 360 Degree</string>
     <string name="action_insert_dummy_data">insert dummy</string>
     <string name="action_delete_all_entries">delete</string>
+    <string name="india">india</string>
+    <string name="india_code">in</string>
 </resources>
