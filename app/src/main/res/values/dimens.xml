@@ -3,4 +3,9 @@
     <dimen name="eightDp">8dp</dimen>
     <dimen name="tenDp">10dp</dimen>
     <dimen name="sixDp">6dp</dimen>
+    <dimen name="fifteenSp">15sp</dimen>
+    <dimen name="thirteenteenSp">13sp</dimen>
+    <dimen name="fiveDp">5dp</dimen>
+    <dimen name="sixteenSp">16sp</dimen>
+    <dimen name="fourteenSp">14sp</dimen>
 </resources>

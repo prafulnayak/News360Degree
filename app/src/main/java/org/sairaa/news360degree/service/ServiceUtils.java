@@ -11,6 +11,8 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
+import org.sairaa.news360degree.CommonUtils;
+
 import java.util.concurrent.TimeUnit;
 
 
@@ -21,7 +23,6 @@ public class ServiceUtils {
     private static final String RTAG = "reminder_tag";
     private static boolean sInitialized;
     synchronized public void scheduleTask(Context context) {
-        Toast.makeText(context,"scheduleed task",Toast.LENGTH_SHORT).show();
         if(sInitialized)
             return;
         Driver driver = new GooglePlayDriver(context);
@@ -37,7 +38,5 @@ public class ServiceUtils {
                 .build();
         dispatcher.schedule(job);
         sInitialized = true;
-
-        Toast.makeText(context,"service start",Toast.LENGTH_SHORT).show();
     }
 }

@@ -17,7 +17,7 @@
     tools:context=".CatalogActivity">
 
     <item
-        android:id="@+id/action_insert_dummy_data"
+        android:id="@+id/action_insert_data"
         android:title="@string/action_insert_dummy_data"
         android:icon="@drawable/ic_refresh"
         app:showAsAction="always" />

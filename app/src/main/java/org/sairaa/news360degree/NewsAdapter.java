@@ -60,17 +60,12 @@ public class NewsAdapter extends PagedListAdapter<News,NewsAdapter.NewsViewHolde
     public void onBindViewHolder(@NonNull NewsViewHolder holder, int position) {
         final News news = getItem(position);
         if(news != null){
-            if(!news.getUrlToImage().isEmpty()){
-//                Glide.with(mCtx)
-//                        .load(news.getUrlToImage())
-//                        .into(holder.imageView);
-
+            if(!news.getUrlToImage().equals("")){
                 holder.imageView.setImageBitmap(downloadImageFromInternal(news.getUrlToImage()));
-//                Toast.makeText(mCtx,"image"+news.getUrlToImage(),Toast.LENGTH_SHORT).show();
-
             }else {
-                holder.imageView.setImageBitmap(null);
-//                Toast.makeText(mCtx,"no image"+news.getUrlToImage(),Toast.LENGTH_SHORT).show();
+                holder.imageView.setImageBitmap(BitmapFactory.decodeResource(mCtx.getResources(),
+                        R.drawable.noimage));
+
             }
             holder.heading.setText(news.getTitle());
             holder.description.setText(news.getDescription());
@@ -80,17 +75,16 @@ public class NewsAdapter extends PagedListAdapter<News,NewsAdapter.NewsViewHolde
             holder.shareImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-//                    Uri imageUri = Uri.parse(news.getUrlToImage());
                     if(!news.getTitle().isEmpty()){
                         Intent shareIntent = new Intent();
                         shareIntent.setAction(Intent.ACTION_SEND);
                         //Target whatsapp:
                         shareIntent.setPackage("com.whatsapp");
                         //Add text and then Image URI
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, news.getTitle());
-//                    shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, news.getTitle()+"\n"+"More at : "+news.getUrl());
+
                         shareIntent.setType("text/plain");
-//                    shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+
 
                         try {
                             mCtx.startActivity(shareIntent);
@@ -115,20 +109,14 @@ public class NewsAdapter extends PagedListAdapter<News,NewsAdapter.NewsViewHolde
 
                 }
             });
-            Log.e("data1",news.getTitle());
         }
-//        news.setUrlToImage("");
     }
 
     private Bitmap downloadImageFromInternal(String imageUriPath) {
         Bitmap b = null;
         try {
             File f=new File(imageUriPath);
-//            Log.i(LOG_TAGADAPTER,"Test "+String.valueOf(f));
             b = BitmapFactory.decodeStream(new FileInputStream(f));
-            //ImageView img=(ImageView)findViewById(R.id.imgPicker);
-            //iImageView.setImageBitmap(b);
-
         }
         catch (FileNotFoundException e)
         {

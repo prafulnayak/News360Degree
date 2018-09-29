@@ -14,14 +14,11 @@ public class BackgroundService extends JobService {
     public boolean onStartJob(final JobParameters job) {
         BackgroundTask backgroundTask = new BackgroundTask(this) {
             @Override
-            protected void onPostExecute(String s) {
-//                super.onPostExecute(s);
-
-
-                Toast.makeText(getApplicationContext(), "back" + s, Toast.LENGTH_LONG).show();
+            protected void onPostExecute(Void aVoid) {
                 jobFinished(job, false);
             }
         };
+
         backgroundTask.execute();
         return true;
     }
@@ -29,12 +26,10 @@ public class BackgroundService extends JobService {
 
     @Override
     public boolean onStopJob(com.firebase.jobdispatcher.JobParameters job) {
-//         if(asyncTask != null)
-//            asyncTask.cancel(true);
         return true;
     }
 
-    public static class BackgroundTask extends AsyncTask<Context, Void, String>{
+    public static class BackgroundTask extends AsyncTask<Void, Void, Void>{
 
         BackgroundService myService;
 
@@ -43,11 +38,13 @@ public class BackgroundService extends JobService {
             this.myService = myService;
         }
 
+
         @Override
-        protected String doInBackground(Context... contexts) {
+        protected Void doInBackground(Void... voids) {
             BackGroundUtils utils = new BackGroundUtils(myService);
             utils.fatchLatestNews();
-            return "hello back fro";
+            return null;
         }
+
     }
 }

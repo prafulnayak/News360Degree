@@ -15,7 +15,7 @@ public class NewsWebView extends AppCompatActivity {
         setContentView(R.layout.activity_news_web_view);
 
         Intent intent = getIntent();
-        String url = intent.getStringExtra("url");
+        String url = intent.getStringExtra(getString(R.string.url));
         webView = findViewById(R.id.webView);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);

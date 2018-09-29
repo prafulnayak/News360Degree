@@ -30,9 +30,9 @@ public class BackGroundUtils {
     }
 
     public void fatchLatestNews() {
+
         String countryName = context.getResources().getConfiguration().locale.getDisplayCountry();
         String countryCode = getCountryCode(countryName);
-//        Toast.makeText(context,"country "+countryCode,Toast.LENGTH_SHORT).show();
         final NewsDatabase mDb = NewsDatabase.getsInstance(context);
         NewsApi newsApi = ApiUtils.getNewsApi();
         newsApi.getTopHeadLine(countryCode,APIKEY).enqueue(new Callback<NewsList>() {
@@ -69,13 +69,18 @@ public class BackGroundUtils {
     }
 
     private void insertNewsToDb(final News news, final NewsDatabase mDb) {
-        String path = commonUtils.uploadImageToInternalStorage(news.getUrlToImage());
-//         = uploadImageToInternalStorage(news.getUrlToImage(),getApplicationContext());
-        news.setUrlToImage(path);
+        if(!news.getUrlToImage().equals("")){
+            String path = commonUtils.uploadImageToInternalStorage(news.getUrlToImage());
+            news.setUrlToImage(path);
+        }
+        String dateTime = CommonUtils.getDate(news.getPublishedAt()).concat(", ").concat(CommonUtils.getTime(news.getPublishedAt()));
+        news.setPublishedAt(dateTime);
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 mDb.newsDao().insert(news);
+                if(!news.getTitle().isEmpty())
+                    CommonUtils.showNotification(context,news.getTitle());
             }
         });
     }
@@ -85,6 +90,7 @@ public class BackGroundUtils {
             return context.getString(R.string.india_code);
 
         }
+        //you can add other countrys code to access respective country news
         return context.getString(R.string.india_code);
     }
 }

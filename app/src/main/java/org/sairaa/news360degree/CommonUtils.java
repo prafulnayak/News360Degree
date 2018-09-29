@@ -1,9 +1,19 @@
 package org.sairaa.news360degree;
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
+
+import org.sairaa.news360degree.service.BackgroundService;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,17 +35,17 @@ public class CommonUtils {
     public String uploadImageToInternalStorage(String urlToImage) {
         Bitmap bitmap = null;
         bitmap = getBitmapFromUrl(urlToImage);
+        if(bitmap == null)
+            return "";
         return saveImage(context,bitmap);
 //        return null;
     }
 
     private String saveImage(Context context, Bitmap bitmap) {
         int uniqueInteger = (int) ((new Date().getTime()) % Integer.MAX_VALUE);
-        Log.e("Time","unique time"+String.valueOf(uniqueInteger));
         String filename = String.valueOf(uniqueInteger)+".jpg";
         File file = new File(context.getFilesDir(), filename);
 
-        //Log.i(LOG_TAG,"Test : "+String.valueOf(mypath));
         FileOutputStream fos = null;
         try {
             fos = new FileOutputStream(file);
@@ -50,7 +60,6 @@ public class CommonUtils {
                 e.printStackTrace();
             }
         }
-//        Log.i(LOG_TAG_BUTIL,"Test : "+String.valueOf(file.getAbsolutePath()));
         return file.getAbsolutePath();
     }
 
@@ -107,5 +116,31 @@ public class CommonUtils {
     public static long getRandomNumber() {
         long x = (long) ((Math.random() * ((100000 - 0) + 1)) + 0);
         return x;
+    }
+
+    public static void showNotification(Context myService, String s){
+        int uniqueInteger = 0;
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(myService,s);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder.setSmallIcon(R.drawable.news360);
+            builder.setLargeIcon(BitmapFactory.decodeResource(myService.getResources(), R.drawable.news360));
+            builder.setColor(myService.getResources().getColor(R.color.colorAccent));
+        } else {
+            builder.setSmallIcon(R.drawable.news360);
+        }
+        builder.setContentTitle(myService.getString(R.string.app_name));
+        builder.setContentText(s);
+        Uri uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+        builder.setSound(uri);
+        builder.setAutoCancel(true);
+        Intent intent = new Intent(myService, MainActivity.class);
+        TaskStackBuilder stackBuilder = TaskStackBuilder.create(myService);
+        stackBuilder.addNextIntent(intent);
+        uniqueInteger = (int) ((new Date().getTime() / 1000L) % Integer.MAX_VALUE);
+        PendingIntent pendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+        builder.setContentIntent(pendingIntent);
+        NotificationManager notificationManager = (NotificationManager) myService.getSystemService(Context.NOTIFICATION_SERVICE);
+        notificationManager.notify(uniqueInteger, builder.build());
+
     }
 }

@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -6,6 +6,35 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="Heading">
+        <item name="android:textSize">@dimen/sixteenSp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">@dimen/fiveDp</item>
+        <item name="android:layout_marginBottom">@dimen/fiveDp</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/google_sans_bold</item>
+    </style>
+    <style name="subHeading">
+        <item name="android:textSize">@dimen/fourteenSp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">@dimen/fiveDp</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/google_sans</item>
+    </style>
+
+    <style name="author">
+        <item name="android:textSize">@dimen/fourteenSp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">@dimen/fiveDp</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/google_sans_bold</item>
+
+    </style>
+    <style name="dateTime">
+        <item name="android:textSize">@dimen/thirteenteenSp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:layout_marginTop">@dimen/fiveDp</item>
+        <item name="android:fontFamily" tools:ignore="NewApi">@font/google_sans_italic</item>
+
     </style>
 
 </resources>

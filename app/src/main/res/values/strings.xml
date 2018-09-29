@@ -6,4 +6,5 @@
     <string name="india_code">in</string>
     <string name="url">url</string>
     <string name="no_url">No URL exist</string>
+    <string name="retrieve">Retrieving News....</string>
 </resources>
