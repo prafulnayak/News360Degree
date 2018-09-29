@@ -76,6 +76,7 @@ public class NewsAdapter extends PagedListAdapter<News,NewsAdapter.NewsViewHolde
             holder.description.setText(news.getDescription());
             holder.author.setText(news.getAuthor());
             holder.publishDate.setText(news.getPublishedAt());
+
             holder.shareImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,6 +99,19 @@ public class NewsAdapter extends PagedListAdapter<News,NewsAdapter.NewsViewHolde
                             Toast.makeText(mCtx,"Whatsapp have not been installed.",Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                }
+            });
+
+            holder.openWindow.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(!news.getUrl().isEmpty()){
+                        Intent intent = new Intent(mCtx,NewsWebView.class);
+                        intent.putExtra(mCtx.getString(R.string.url),news.getUrl());
+                        mCtx.startActivity(intent);
+                    }else
+                        Toast.makeText(mCtx,mCtx.getString(R.string.no_url),Toast.LENGTH_SHORT).show();
 
                 }
             });

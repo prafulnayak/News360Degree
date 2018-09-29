@@ -4,4 +4,6 @@
     <string name="action_delete_all_entries">delete</string>
     <string name="india">india</string>
     <string name="india_code">in</string>
+    <string name="url">url</string>
+    <string name="no_url">No URL exist</string>
 </resources>
