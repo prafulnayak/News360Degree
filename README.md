@@ -18,4 +18,11 @@ Navigation drawer to view categories news.
 Share intent for WhatsApp. 
 WebView to view news on details.
 
+# Screen
+<img src="https://user-images.githubusercontent.com/37037860/46260274-5cf50200-c501-11e8-8425-41e205edc725.png" width="210" height="400" alt="Screen Shots">
+<img src="https://user-images.githubusercontent.com/37037860/46260275-5cf50200-c501-11e8-9319-eb5e26914ac0.png" width="210" height="400" alt="Screen Shots">
+<img src="https://user-images.githubusercontent.com/37037860/46260276-5d8d9880-c501-11e8-9405-a6248191c595.png" width="210" height="400" alt="Screen Shots">
+<img src="https://user-images.githubusercontent.com/37037860/46260277-5d8d9880-c501-11e8-92cf-ad7e2eecc84c.png" width="210" height="400" alt="Screen Shots">
+<img src="https://user-images.githubusercontent.com/37037860/46260278-5d8d9880-c501-11e8-9270-6b1057d17f8d.png" width="210" height="400" alt="Screen Shots">
+
 # Thanks To Udacity
