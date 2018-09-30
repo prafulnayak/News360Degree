@@ -56,12 +56,14 @@ public class CategoryActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         //get the category details from intent
-        String category = intent.getStringExtra("category");
+        String category = intent.getStringExtra(getString(R.string.category));
+
         Toolbar toolbar = findViewById(R.id.toolbar_cat);
         setSupportActionBar(toolbar);
         ActionBar actionbar = getSupportActionBar();
         if(getSupportActionBar() != null){
             actionbar.setDisplayHomeAsUpEnabled(true);
+            actionbar.setTitle(category);
         }
 
         checkConnection = new CheckConnection(this);

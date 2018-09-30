@@ -21,5 +21,6 @@
     <string name="science_cat">science</string>
     <string name="sports_cat">sports</string>
     <string name="technology_cat">technology</string>
+    <string name="category">category</string>
 
 </resources>

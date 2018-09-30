@@ -105,27 +105,27 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this,CategoryActivity.class);
                 switch (menuItem.getItemId()){
                     case R.id.nav_business:
-                        intent.putExtra("category",getString(R.string.business_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.business_cat));
                         startActivity(intent);
                         break;
                     case  R.id.nav_entertainment:
-                        intent.putExtra("category",getString(R.string.entertainment_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.entertainment_cat));
                         startActivity(intent);
                         break;
                     case R.id.nav_health:
-                        intent.putExtra("category",getString(R.string.health_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.health_cat));
                         startActivity(intent);
                         break;
                     case R.id.nav_science:
-                        intent.putExtra("category",getString(R.string.science_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.science_cat));
                         startActivity(intent);
                         break;
                     case R.id.nav_sports:
-                        intent.putExtra("category",getString(R.string.sports_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.sports_cat));
                         startActivity(intent);
                         break;
                     case R.id.nav_technology:
-                        intent.putExtra("category",getString(R.string.technology_cat));
+                        intent.putExtra(getString(R.string.category),getString(R.string.technology_cat));
                         startActivity(intent);
                         break;
                 }
