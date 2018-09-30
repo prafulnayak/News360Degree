@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true">
-
-    <!-- Layout to contain contents of main body of screen (drawer will slide over this) -->
+    tools:context=".MainActivity">
     <FrameLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
@@ -15,10 +13,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
+
             <android.support.v7.widget.Toolbar
-                android:id="@+id/toolbar"
+                android:id="@+id/toolbar_cat"
                 android:layout_width="match_parent"
-                app:titleTextColor="@color/colorT"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
                 android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
@@ -30,7 +28,7 @@
                 tools:context=".MainActivity">
 
                 <android.support.v7.widget.RecyclerView
-                    android:id="@+id/recyclerview"
+                    android:id="@+id/recyclerview_cat"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +36,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/floatingActionButton2"
+                    android:id="@+id/fab_cat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
@@ -61,16 +59,4 @@
 
     </FrameLayout>
 
-    <!-- Container for contents of drawer - use NavigationView to make configuration easier -->
-    <android.support.design.widget.NavigationView
-        android:id="@+id/nav_view"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:fitsSystemWindows="true"
-        android:background="@color/colorT"
-        app:menu="@menu/drawer_view"
-        app:headerLayout="@layout/nav_header"/>
-
-</android.support.v4.widget.DrawerLayout>
-
+</android.support.constraint.ConstraintLayout>

@@ -15,7 +15,15 @@ public interface NewsApi {
                                @Query("apiKey") String apiKey,
                                @Query("pageSize") int pageSize,
                                @Query("page") long page);
+//    https://newsapi.org/v2/top-headlines?country=in&apiKey=c19366b11c0440848041a33b1745e3d1
     @GET("v2/top-headlines")
-    Call<NewsList> getTopHeadLine(@Query("country") String cpuntry,
+    Call<NewsList> getTopHeadLine(@Query("country") String country,
                                   @Query("apiKey") String apiKey);
+    //    https://newsapi.org/v2/top-headlines?country=in&category=business/health&apiKey=c19366b11c0440848041a33b1745e3d1
+    @GET("v2/top-headlines")
+    Call<NewsList> getTopHeadLineCategory(@Query("country") String country,
+                                            @Query("category") String category,
+                                            @Query("apiKey") String apiKey);
+
+
 }

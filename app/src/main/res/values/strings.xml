@@ -9,4 +9,17 @@
     <string name="retrieve">Retrieving News....</string>
     <string name="newsApi">NewsApi</string>
     <string name="network">Unable to retrieve Latest News. Check Connection</string>
+    <string name="business">Business</string>
+    <string name="entertainment">Entertainment</string>
+    <string name="health">Health</string>
+    <string name="science">Science</string>
+    <string name="sports">Sports</string>
+    <string name="technology">Technology</string>
+    <string name="business_cat">business</string>
+    <string name="entertainment_cat">entertainment</string>
+    <string name="health_cat">health</string>
+    <string name="science_cat">science</string>
+    <string name="sports_cat">sports</string>
+    <string name="technology_cat">technology</string>
+
 </resources>

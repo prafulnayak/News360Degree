@@ -26,13 +26,16 @@ public class BackGroundUtils {
         this.context = context;
         commonUtils = new CommonUtils(context);
     }
-
+    //fatch latest news and insert it into room and notifies user on new news arrival
     public void fatchLatestNews() {
-
+        //get local country name
         String countryName = context.getResources().getConfiguration().locale.getDisplayCountry();
+        //get the country code required for retrival of respective country news
         String countryCode = getCountryCode(countryName);
+        //get instance of room database
         final NewsDatabase mDb = NewsDatabase.getsInstance(context);
         NewsApi newsApi = ApiUtils.getNewsApi();
+        //make retrofit call to retrieve top headline of the respective country
         newsApi.getTopHeadLine(countryCode,APIKEY).enqueue(new Callback<NewsList>() {
             @Override
             public void onResponse(Call<NewsList> call, Response<NewsList> response) {
@@ -43,6 +46,8 @@ public class BackGroundUtils {
                     Executors.newSingleThreadExecutor().execute(new Runnable() {
                         @Override
                         public void run() {
+                            //check whether same news object available or not
+                            //if not available insert that news object to room database
                             List<News> newsL = mDb.newsDao().getSingleNews(newsList.getNewsDataList().get(position).getTitle());
                             if(newsL.isEmpty()){
                                 News news = new News(newsList.getNewsDataList().get(position).getAuthor() == null ?"NewsApi" :newsList.getNewsDataList().get(position).getAuthor(),
@@ -52,6 +57,7 @@ public class BackGroundUtils {
                                         newsList.getNewsDataList().get(position).getUrlToImage()== null? "":newsList.getNewsDataList().get(position).getUrlToImage(),
                                         newsList.getNewsDataList().get(position).getPublishedAt()== null? "":newsList.getNewsDataList().get(position).getPublishedAt(),
                                         1);
+                                //insert to room database
                                 insertNewsToDb(news,mDb);
                             }
                         }
@@ -65,18 +71,21 @@ public class BackGroundUtils {
             }
         });
     }
-
+    //insert to room database
     private void insertNewsToDb(final News news, final NewsDatabase mDb) {
         if(!news.getUrlToImage().equals("")){
+            //insert image to internal storage and get the path and set it to news object
             String path = commonUtils.uploadImageToInternalStorage(news.getUrlToImage());
             news.setUrlToImage(path);
         }
-        String dateTime = CommonUtils.getDate(news.getPublishedAt()).concat(", ").concat(CommonUtils.getTime(news.getPublishedAt()));
+        //format the date and time and set it to news object
+        String dateTime = CommonUtils.getDate(news.getPublishedAt()).concat(" ").concat(CommonUtils.getTime(news.getPublishedAt()));
         news.setPublishedAt(dateTime);
         Executors.newSingleThreadExecutor().execute(new Runnable() {
             @Override
             public void run() {
                 mDb.newsDao().insert(news);
+                //if new data is inserted to database notify to user
                 if(!news.getTitle().isEmpty())
                     CommonUtils.showNotification(context,news.getTitle());
             }
@@ -88,7 +97,7 @@ public class BackGroundUtils {
             return context.getString(R.string.india_code);
 
         }
-        //you can add other countrys code to access respective country news
+        //you can add other countries code to access respective country news
         return context.getString(R.string.india_code);
     }
 }

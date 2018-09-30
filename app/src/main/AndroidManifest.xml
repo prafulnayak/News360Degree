@@ -33,8 +33,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".NewsWebView"
-            android:parentActivityName=".MainActivity"></activity>
+        <activity
+            android:name=".NewsWebView"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".CategoryActivity"></activity>
     </application>
 
 </manifest>

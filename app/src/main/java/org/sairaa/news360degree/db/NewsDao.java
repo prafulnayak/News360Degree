@@ -13,6 +13,9 @@ public interface NewsDao {
     @Query("SELECT * FROM News ORDER BY id DESC")
     DataSource.Factory<Integer, News> allNewsDetails();
 
+    @Query("SELECT * FROM News WHERE bookMark =:bookmark ORDER BY id DESC")
+    DataSource.Factory<Integer, News> allNewsDetailsCatogory(int bookmark);
+
     @Query("SELECT * FROM News WHERE title = :titleDesc")
     List<News> getSingleNews(String titleDesc);
 

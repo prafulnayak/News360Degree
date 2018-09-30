@@ -22,6 +22,7 @@ public class ServiceUtils {
     synchronized public void scheduleTask(Context context) {
         if(sInitialized)
             return;
+        //firebase job dispatcher and constraint
         Driver driver = new GooglePlayDriver(context);
         FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(driver);
         Job job = dispatcher.newJobBuilder()

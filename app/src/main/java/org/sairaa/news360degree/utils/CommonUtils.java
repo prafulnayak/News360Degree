@@ -90,7 +90,7 @@ public class CommonUtils {
         try{
             SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss'Z'");
             Date date = format1.parse(dateString);
-            DateFormat sdf = new SimpleDateFormat("MMM d, yyyy");
+            DateFormat sdf = new SimpleDateFormat("MMM d yyyy");
             return sdf.format(date);
         }
         catch(Exception ex) {
@@ -144,5 +144,28 @@ public class CommonUtils {
         NotificationManager notificationManager = (NotificationManager) myService.getSystemService(Context.NOTIFICATION_SERVICE);
         notificationManager.notify(uniqueInteger, builder.build());
 
+    }
+    public String getCountryCode(String countryName) {
+        if (countryName.equals(context.getString(R.string.india))) {
+            return context.getString(R.string.india_code);
+
+        }
+        return context.getString(R.string.india_code);
+    }
+    public int getBookMark(String category) {
+        if(category.equals(context.getString(R.string.business_cat))){
+            return 2;
+        }else if(category.equals(context.getString(R.string.entertainment_cat))){
+            return 3;
+        }else if(category.equals(context.getString(R.string.health_cat))){
+            return 4;
+        }else if(category.equals(context.getString(R.string.science_cat))){
+            return 5;
+        }else if(category.equals(context.getString(R.string.sports_cat))){
+            return 6;
+        }else if(category.equals(context.getString(R.string.technology_cat))){
+            return 7;
+        }else
+            return 1;
     }
 }
