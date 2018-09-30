@@ -1,10 +1,8 @@
 package org.sairaa.news360degree.service;
 
 import android.content.Context;
-import android.util.Log;
-import android.widget.Toast;
 
-import org.sairaa.news360degree.CommonUtils;
+import org.sairaa.news360degree.utils.CommonUtils;
 import org.sairaa.news360degree.R;
 import org.sairaa.news360degree.api.ApiUtils;
 import org.sairaa.news360degree.api.NewsApi;

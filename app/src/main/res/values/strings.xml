@@ -7,4 +7,6 @@
     <string name="url">url</string>
     <string name="no_url">No URL exist</string>
     <string name="retrieve">Retrieving News....</string>
+    <string name="newsApi">NewsApi</string>
+    <string name="network">Unable to retrieve Latest News. Check Connection</string>
 </resources>

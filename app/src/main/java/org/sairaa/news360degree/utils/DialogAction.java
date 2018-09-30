@@ -1,4 +1,4 @@
-package org.sairaa.news360degree;
+package org.sairaa.news360degree.utils;
 
 import android.app.ProgressDialog;
 import android.content.Context;

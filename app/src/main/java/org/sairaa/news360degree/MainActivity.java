@@ -20,6 +20,9 @@ import org.sairaa.news360degree.db.News;
 import org.sairaa.news360degree.db.NewsDatabase;
 import org.sairaa.news360degree.model.NewsList;
 import org.sairaa.news360degree.service.ServiceUtils;
+import org.sairaa.news360degree.utils.CheckConnection;
+import org.sairaa.news360degree.utils.CommonUtils;
+import org.sairaa.news360degree.utils.DialogAction;
 
 import java.io.IOException;
 import java.util.List;
@@ -34,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private NewsAdapter adapter;
     private NewsViewModel viewModel;
+    private CheckConnection checkConnection;
     DialogAction dialogAction;
     CommonUtils commonUtils;
     FloatingActionButton floatingActionButton;
@@ -51,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        checkConnection = new CheckConnection(this);
         floatingActionButton = findViewById(R.id.floatingActionButton2);
         dialogAction = new DialogAction(this);
         commonUtils = new CommonUtils(this);
@@ -60,7 +65,11 @@ public class MainActivity extends AppCompatActivity {
         viewModel = ViewModelProviders.of(this).get(NewsViewModel.class);
         adapter = new NewsAdapter(this);
         recyclerView.setAdapter(adapter);
-        insertNewsToDb(Executors.newSingleThreadExecutor());
+        if(checkConnection.isConnected()){
+            insertNewsToDb(Executors.newSingleThreadExecutor());
+        }else
+            Toast.makeText(this,getString(R.string.network),Toast.LENGTH_LONG).show();
+
         subscribeUi(adapter);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,8 +114,6 @@ public class MainActivity extends AppCompatActivity {
                 adapter.submitList(news);
                 adapter.notifyDataSetChanged();
                 recyclerView.smoothScrollToPosition(0);
-
-
             }
         });
     }
@@ -125,7 +132,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_data:
-                insertNewsToDb(Executors.newSingleThreadExecutor());
+                if(checkConnection.isConnected()){
+                    insertNewsToDb(Executors.newSingleThreadExecutor());
+                }else
+                    Toast.makeText(this,getString(R.string.network),Toast.LENGTH_LONG).show();
+
                 return true;
 
         }
@@ -133,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void insertNewsToDb(final Executor executor) {
+
         String countryName = getApplicationContext().getResources().getConfiguration().locale.getDisplayCountry();
         String countryCode = getCountryCode(countryName);
         final NewsDatabase mDb = NewsDatabase.getsInstance(this);
@@ -151,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                         public void run() {
                             List<News> newsL = mDb.newsDao().getSingleNews(newsList.getNewsDataList().get(position).getTitle());
                             if(newsL.isEmpty()){
-                                News news = new News(newsList.getNewsDataList().get(position).getAuthor() == null ?"NewsApi" :newsList.getNewsDataList().get(position).getAuthor(),
+                                News news = new News(newsList.getNewsDataList().get(position).getAuthor() == null ? getString(R.string.newsApi) :newsList.getNewsDataList().get(position).getAuthor(),
                                         newsList.getNewsDataList().get(position).getTitle() == null ? "" : newsList.getNewsDataList().get(position).getTitle(),
                                         newsList.getNewsDataList().get(position).getDescription() == null? "" :newsList.getNewsDataList().get(position).getDescription(),
                                         newsList.getNewsDataList().get(position).getUrl() == null? "":newsList.getNewsDataList().get(position).getUrl(),

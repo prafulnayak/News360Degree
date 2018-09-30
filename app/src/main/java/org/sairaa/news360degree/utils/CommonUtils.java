@@ -1,4 +1,4 @@
-package org.sairaa.news360degree;
+package org.sairaa.news360degree.utils;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -13,6 +13,8 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 import android.util.Log;
 
+import org.sairaa.news360degree.MainActivity;
+import org.sairaa.news360degree.R;
 import org.sairaa.news360degree.service.BackgroundService;
 
 import java.io.File;
